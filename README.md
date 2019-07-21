@@ -1,3 +1,3 @@
 # Ceph-Manager
-Manage the Ceph 
+scripts
 use shell or python to manage the cluster
