@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
+#无法显示每个osd所占的核
 import os
 import sys
 import json
