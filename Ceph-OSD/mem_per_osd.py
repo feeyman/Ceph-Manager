@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 import os
 import sys
@@ -23,14 +24,19 @@ def printosdmemtable(chosse):
         row.field_names = memlist
         for root, dirs, files in os.walk('/var/run/ceph/'):
             for name in files:
-                if "osd"  in name and "pid" in name :
+                if "osd"  in name and "asok" in name :
                     osdlist = []
                     osdthlist=[]
                     for osdmem in range(len(memchose)):
                         osdlist.append(" ")
+
                     pidfile=root+ name
                     osdid=commands.getoutput('ls  %s|cut -d "." -f 2 2>/dev/null'  %pidfile )
-                    osdpid = commands.getoutput('cat %s  2>/dev/null' %pidfile)
+                  #  osdpid = commands.getoutput('cat %s  2>/dev/null' %pidfile)
+                  #  usedPercents=commands.getoutput("df -h|grep sda|awk '{print $5}'|grep -Eo '[0-9]+'").split('\n')
+
+                    osdpid = commands.getoutput("netstat -nlp|grep %s |awk '{print $9}'" %pidfile).split("/")[0]
+
                     osd_runmemvsz = commands.getoutput('ps -p %s  -o vsz |grep -v VSZ 2>/dev/null' %osdpid)
                     osd_runmemrsz = commands.getoutput('ps -p %s  -o rsz |grep -v RSZ 2>/dev/null' %osdpid)
                     osdname="osd."+osdid
